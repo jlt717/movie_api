@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 let topMovies = [
   {
@@ -54,6 +55,7 @@ let topMovies = [
 ];
 
 // GET requests
+app.use(morgan("common"));
 app.get("/", (req, res) => {
   res.send("Welcome to Cinedex!");
 });
@@ -64,6 +66,14 @@ app.get("/documentation", (req, res) => {
 
 app.get("/movies", (req, res) => {
   res.json(topMovies);
+});
+
+app.use(express.static("public"));
+
+//error-handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
 // listen for requests
