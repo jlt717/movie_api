@@ -55,6 +55,7 @@ let topMovies = [
 ];
 
 // GET requests
+app.use(express.static("public"));
 app.use(morgan("common"));
 app.get("/", (req, res) => {
   res.send("Welcome to Cinedex!");
@@ -67,8 +68,6 @@ app.get("/documentation", (req, res) => {
 app.get("/movies", (req, res) => {
   res.json(topMovies);
 });
-
-app.use(express.static("public"));
 
 //error-handling middleware
 app.use((err, req, res, next) => {
