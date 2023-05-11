@@ -291,9 +291,9 @@ app.get("/movies/:title", (req, res) => {
 //Return data about a genre by name
 app.get("/movies/genre/:genreName", (req, res) => {
   const { genreName } = req.params;
-  const genre = movies.find((movie) => movie.Genre.Name === genreName).Genre;
+  const genre = movies.find((movie) => movie.Genre.Name === genreName);
   if (genre) {
-    res.status(200).json(genre);
+    res.status(200).json(genre.Genre);
   } else {
     res.status(400).send("This genre does not exist.");
   }
@@ -302,9 +302,9 @@ app.get("/movies/genre/:genreName", (req, res) => {
 //Return data about director by name
 app.get("/movies/director/:directorName", (req, res) => {
   const { directorName } = req.params;
-  const director = movies.find((movie) => movie.Name === directorName).Director;
+  const director = movies.find((movie) => movie.Director.Name === directorName);
   if (director) {
-    res.status(200).json(director);
+    res.status(200).json(director.Director);
   } else {
     res.status(400).send("This director does not exist.");
   }
