@@ -15,5 +15,96 @@
       search for favortie movies or find new films to add to their list of
       favorites.
     </p>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+    <h2>Table of Requests</h2>
+
+    <table style="width: 100%">
+      <tr>
+        <th>Features</th>
+        <th>Endpoint URL</th>
+        <th>HTTP Method</th>
+        <th>Query Parameters</th>
+        <th>Request Body Data Format</th>
+        <th>Response Body Data Format</th>
+      </tr>
+      <tr>
+        <td>Allows new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>none</td>
+        <td>A JSON object holding data about a user to add</td>
+        <td>A JSON object holding data that was added about user</td>
+      </tr>
+      <tr>
+        <td>Allows users to update usernames</td>
+        <td>/users/:id</td>
+        <td>PUT</td>
+        <td>id</td>
+        <td>A JSON object holding updated username</td>
+        <td>A JSON object holding updates username</td>
+      </tr>
+      <tr>
+        <td>Allows users to add movies to favorite movie list</td>
+        <td>/users/:id/:movieTitle</td>
+        <td>POST</td>
+        <td>id, movieTitle</td>
+        <td>A JSON object holding data about movie to add</td>
+        <td>A text message confirming movie was added</td>
+      </tr>
+      <tr>
+        <td>Allows users to delete movies from favorite movie list</td>
+        <td>/users/:id/:movieTitle</td>
+        <td>DELETE</td>
+        <td>id, movieTitle</td>
+        <td>none</td>
+        <td>A text message confirming movie was deleted</td>
+      </tr>
+      <tr>
+        <td>Allows users to delete their account</td>
+        <td>/users/:id</td>
+        <td>DELETE</td>
+        <td>id</td>
+        <td>none</td>
+        <td>A text message confirming account was deleted</td>
+      </tr>
+      <tr>
+        <td>Returns list of all movies</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>none</td>
+        <td>A JSON object holding data about all movies</td>
+      </tr>
+      <tr>
+        <td>Returns data about single movie by name</td>
+        <td>/movies/:title</td>
+        <td>GET</td>
+        <td>title</td>
+        <td>none</td>
+        <td>A JSON object holding data about a specific movie</td>
+      </tr>
+      <tr>
+        <td>Returns data about specific genre by name</td>
+        <td>/movies/genre/:genreName</td>
+        <td>GET</td>
+        <td>genreName</td>
+        <td>none</td>
+        <td>A JSON object holding data about a specific genre</td>
+      </tr>
+      <tr>
+        <td>Returns data about specific director by name</td>
+        <td>/movies/director/:directorName</td>
+        <td>GET</td>
+        <td>directorName</td>
+        <td>none</td>
+        <td>A JSON object holding data about a specific director</td>
+      </tr>
+    </table>
   </body>
 </html>
