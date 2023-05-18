@@ -43,33 +43,33 @@
       </tr>
       <tr>
         <td>Allows users to update usernames</td>
-        <td>/users/:id</td>
+        <td>/users/:username</td>
         <td>PUT</td>
-        <td>id</td>
+        <td>username</td>
         <td>A JSON object holding updated username</td>
         <td>A JSON object holding updates username</td>
       </tr>
       <tr>
         <td>Allows users to add movies to favorite movie list</td>
-        <td>/users/:id/:movieTitle</td>
+        <td>/users/:username/:movieID</td>
         <td>POST</td>
-        <td>id, movieTitle</td>
+        <td>username, movieID</td>
         <td>A JSON object holding data about movie to add</td>
         <td>A text message confirming movie was added</td>
       </tr>
       <tr>
         <td>Allows users to delete movies from favorite movie list</td>
-        <td>/users/:id/:movieTitle</td>
+        <td>/users/:username/:movieID</td>
         <td>DELETE</td>
-        <td>id, movieTitle</td>
+        <td>username, movieID</td>
         <td>none</td>
         <td>A text message confirming movie was deleted</td>
       </tr>
       <tr>
         <td>Allows users to delete their account</td>
-        <td>/users/:id</td>
+        <td>/users/:username</td>
         <td>DELETE</td>
-        <td>id</td>
+        <td>username</td>
         <td>none</td>
         <td>A text message confirming account was deleted</td>
       </tr>
