@@ -11,9 +11,9 @@
     <p>
       Title: Cinedex <br />
       This application allows movie lovers to create their own profiles and
-      provides them with information about movies, actors, and genres. Users can
-      search for favortie movies or find new films to add to their list of
-      favorites.
+      provides them with information about an assortment of movies, directors,
+      and genres. Users can search for favortie movies or find new films to add
+      to their list of favorites.
     </p>
     <style>
       table,
@@ -38,23 +38,46 @@
         <td>/users</td>
         <td>POST</td>
         <td>none</td>
-        <td>A JSON object holding data about a user to add</td>
-        <td>A JSON object holding data that was added about user</td>
+        <td>
+          A JSON object holding data about a user to add in the following
+          format: {"Username": "String", "Password": "String", "Email":
+          "String", "Birthday": "Date"} Example: {"Username": "Bobby",
+          "Password": "wheat674", "Email": "RickyBobby@gmail.com", "Birthday":
+          "07-23-1987"}
+        </td>
+        <td>
+          A JSON object holding data about new user with additional generated
+          information: {"Username": "Bobby","Password": "wheat674", "Email":
+          "RickyBobby@gmail.com", "Birthday": "1987-07-23T05:00:00.000Z",
+          "FavoriteMovies": [],"_id": "6466455272dc47f71b0dbb66","__v": 0}
+        </td>
       </tr>
       <tr>
         <td>Allows users to update usernames</td>
         <td>/users/:username</td>
         <td>PUT</td>
         <td>username</td>
-        <td>A JSON object holding updated username</td>
-        <td>A JSON object holding updates username</td>
+        <td>
+          A JSON object holding the data being updated about a user to add in
+          the following format: {"Username": "String", "Password": "String",
+          "Email": "String", "Birthday": "Date"} EXAMPLE: {"Username": "Bobby",
+          "Password": "wheat674", "Email": "RickyBobby@gmail.com", "Birthday":
+          "07-23-1987"}
+        </td>
+        <td>
+          A JSON object holding data about new user with additional generated
+          information: EXAMPLE: {"Username": "Bobby","Password": "wheat674",
+          "Email": "RickyBobby@gmail.com", "Birthday":
+          "1987-07-23T05:00:00.000Z", "FavoriteMovies": [],"_id":
+          "6466455272dc47f71b0dbb66","__v": 0}
+        </td>
       </tr>
       <tr>
         <td>Allows users to add movies to favorite movie list</td>
         <td>/users/:username/:movieID</td>
         <td>POST</td>
         <td>username, movieID</td>
-        <td>A JSON object holding data about movie to add</td>
+        <td>none</td>
         <td>A text message confirming movie was added</td>
       </tr>
       <tr>
@@ -79,7 +102,13 @@
         <td>GET</td>
         <td>none</td>
         <td>none</td>
-        <td>A JSON object holding data about all movies</td>
+        <td>
+          A JSON object holding data about all movies in the following format: {
+          Title: { type: String, required: true }, Description: { type: String,
+          required: true }, Genre: { Name: String, Description: String, },
+          Director: { Name: String, Bio: String, Birth: String, Death: String,
+          }, ImagePath: String, Featured: Boolean, _id: String }
+        </td>
       </tr>
       <tr>
         <td>Returns data about single movie by name</td>
@@ -87,7 +116,31 @@
         <td>GET</td>
         <td>title</td>
         <td>none</td>
-        <td>A JSON object holding data about a specific movie</td>
+        <td>
+          A JSON object holding data about a specific movie with the following
+          format: { Title: { type: String, required: true }, Description: {
+          type: String, required: true }, Genre: { Name: String, Description:
+          String, }, Director: { Name: String, Bio: String, Birth: String,
+          Death: String, }, ImagePath: String, Featured: Boolean, _id: String }
+          EXAMPLE: { "Genre": { "Name": "Fantasy", "Description": "Fantasy films
+          are films that belong to the fantasy genre with fantastic themes,
+          usually magic, supernatural events, mythology, folklore, or exotic
+          fantasy worlds. The genre is considered a form of speculative fiction
+          alongside science fiction films and horror films, although the genres
+          do overlap." }, "Director": { "Name": "Jim Henson", "Bio": "James
+          Maury Henson was an American puppeteer, animator, cartoonist, actor,
+          inventor, and filmmaker who achieved worldwide notability as the
+          creator of The Muppets and Fraggle Rock and director of The Dark
+          Crystal and Labyrinth.", "Birthyear": 1936, "Deathyear": 1990 },
+          "_id": "6463cc7a7ffa592837cdc906", "Title": "Labyrinth", "Released":
+          1986, "Description": "The film stars Jennifer Connelly as 16-year-old
+          Sarah and David Bowie as Jareth, the Goblin King. In Labyrinth, Sarah
+          embarks on a quest to reach the center of an enormous, otherworldly
+          maze to rescue her infant half-brother Toby, whom she wished away to
+          Jareth during a moment of frustration while babysitting.", "ImageURL":
+          "https://m.media-amazon.com/images/M/MV5BMjM2MDE4OTQwOV5BMl5BanBnXkFtZTgwNjgxMTg2NzE@._V1_FMjpg_UX1000_.jpg",
+          "Featured": true }
+        </td>
       </tr>
       <tr>
         <td>Returns data about specific genre by name</td>
@@ -95,7 +148,16 @@
         <td>GET</td>
         <td>genreName</td>
         <td>none</td>
-        <td>A JSON object holding data about a specific genre</td>
+        <td>
+          A JSON object holding data about a specific genre in the following
+          format:{Genre: { Name: String, Description: String, } _id: String}
+          EXAMPLE: { "Genre": { "Name": "Adventure", "Description": "Adventure
+          film is a genre that revolves around the conquests and explorations of
+          a protagonist. The purpose of the conquest can be to retrieve a person
+          or treasure, but often the main focus is simply the pursuit of the
+          unknown. These films generally take place in exotic locations and play
+          on historical myths." }, "_id": "6463cc7a7ffa592837cdc905" }
+        </td>
       </tr>
       <tr>
         <td>Returns data about specific director by name</td>
@@ -103,7 +165,17 @@
         <td>GET</td>
         <td>directorName</td>
         <td>none</td>
-        <td>A JSON object holding data about a specific director</td>
+        <td>
+          A JSON object holding data about a specific director in the following
+          format: { Director: { Name: String, Bio: String, Birth: String, Death:
+          String, } _id: String} EXAMPLE: { "Genre": { "Name": "Adventure",
+          "Description": "Adventure film is a genre that revolves around the
+          conquests and explorations of a protagonist. The purpose of the
+          conquest can be to retrieve a person or treasure, but often the main
+          focus is simply the pursuit of the unknown. These films generally take
+          place in exotic locations and play on historical myths." }, "_id":
+          "6463cc7a7ffa592837cdc905" }
+        </td>
       </tr>
     </table>
   </body>
