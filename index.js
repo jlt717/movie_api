@@ -27,30 +27,25 @@ app.get("/", (req, res) => {
 //Allow new users to register
 
 app.post("/users", (req, res) => {
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + "already exists");
-      } else {
-        Users.create({
-          Username: req.body.Username,
-          Password: req.body.Password,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday,
+  Users.findOne({ Username: req.body.Username }).then((user) => {
+    if (user) {
+      return res.status(400).send(req.body.Username + "already exists");
+    } else {
+      Users.create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday,
+      })
+        .then((user) => {
+          res.status(201).json(user);
         })
-          .then((user) => {
-            res.status(201).json(user);
-          })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error: " + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        });
+    }
+  });
 });
 
 //Allows users to search for a specific user
@@ -65,7 +60,7 @@ app.get("/users/:Username", (req, res) => {
     });
 });
 
-//Allow users to update username
+//Allow users to update user profile information
 
 app.put("/users/:Username", (req, res) => {
   Users.findOneAndUpdate(
@@ -78,16 +73,15 @@ app.put("/users/:Username", (req, res) => {
         Birthday: req.body.Birthday,
       },
     },
-    { new: true }, // This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
-      }
-    }
-  );
+    { new: true }
+  )
+    .then((updatedUser) => {
+      res.status(200).json(updatedUser);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //Allow users to add movies to their favorite movie list
@@ -96,18 +90,18 @@ app.post("/users/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $push: { FavoriteMovies: req.params.MovieID },
+      $addToSet: { FavoriteMovies: req.params.MovieID },
     },
-    { new: true }, // This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
-      }
-    }
-  );
+    { new: true }
+  )
+    .then(() => {
+      res
+        .status(200)
+        .send(req.params.MovieID + " was added to your Favorite Movies list.");
+    })
+    .catch((err) => {
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //Allow users to delete movies from their favorite movie list
@@ -118,31 +112,26 @@ app.delete("/users/:Username/movies/:MovieID", (req, res) => {
     {
       $pull: { FavoriteMovies: req.params.MovieID },
     },
-    { new: true }, // This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
-      }
-    }
-  );
+    { new: true }
+  )
+    .then(() => {
+      res
+        .status(200)
+        .send(req.params.MovieID + " was deleted from Favorite Movies List.");
+    })
+    .catch((err) => {
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //Allows users to delete their account
 
 app.delete("/users/:Username", (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
-    .then((user) => {
-      if (!user) {
-        res.status(400).send(req.params.Username + " was not found");
-      } else {
-        res.status(200).send(req.params.Username + " was deleted.");
-      }
+    .then(() => {
+      res.status(200).send(req.params.Username + " was deleted.");
     })
     .catch((err) => {
-      console.error(err);
       res.status(500).send("Error: " + err);
     });
 });
