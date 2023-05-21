@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
-// const Directors = Models.Director;
-// const Genres = Models.Genre;
+
 const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
@@ -233,6 +232,7 @@ app.get(
 //
 //error-handling middleware
 app.use((err, req, res, next) => {
+  console.log(err);
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
