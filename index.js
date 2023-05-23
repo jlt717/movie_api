@@ -20,6 +20,7 @@ const cors = require("cors");
 app.use(cors());
 
 app.use(cors({ origin: "*" }));
+
 //let allowedOrigins = ["'http://localhost:8080', 'http://testsite.com'"];
 //   origin: (origin, callback) => {
 //     if (!origin) return callback(null, true);
