@@ -60,39 +60,34 @@ app.post(
     check("Password", "Password is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
   ],
+
   (req, res) => {
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
+    console.log(Users);
     let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOne({ Username: req.body.Username })
-      .then((user) => {
-        if (user) {
-          return res
-            .status(400)
-            .send(req.body.Username + " " + "already exists");
-        } else {
-          Users.create({
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday,
+    Users.findOne({ Username: req.body.Username }).then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + " " + "already exists");
+      } else {
+        Users.create({
+          Username: req.body.Username,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
+        })
+          .then((user) => {
+            res.status(201).json(user);
           })
-            .then((user) => {
-              res.status(201).json(user);
-            })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error: " + error);
+          });
+      }
+    });
   }
 );
 
