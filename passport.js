@@ -15,14 +15,16 @@ passport.use(
     },
     (username, password, callback) => {
       console.log(username + " " + password);
+
       Users.findOne({ Username: username })
         .then((user) => {
           if (!user) {
             console.log("incorrect username");
             return callback(null, false, {
-              message: "Incorrect username.",
+              message: "Incorrect username or password.",
             });
           }
+
           if (!user.validatePassword(password)) {
             console.log("incorrect password");
             return callback(null, false, { message: "Incorrect password." });
@@ -31,42 +33,35 @@ passport.use(
           console.log("finished");
           return callback(null, user);
         })
-
-        .catch((error) => {
-          console.log(error);
-          return callback(error, false);
+        .catch((e) => {
+          console.error(e);
+          return callback(error);
         });
     }
   )
 );
 
-// passport.use(
-//   new LocalStrategy(
-//     {
-//       usernameField: "Username",
-//       passwordField: "Password",
-//     },
-//     (username, password, callback) => {
-//       console.log(username + "  " + password);
-//       Users.findOne({ Username: username }, (error, user) => {
-//         if (error) {
-//           console.log(error);
-//           return callback(error);
-//         }
-//         if (!user) {
-//           console.log("incorrect username");
-//           return callback(null, false, {
-//             message: "Incorrect username or password.",
-//           });
-//         }
-//         if (!user.validatePassword(password)) {
-//           console.log("incorrect password");
-//           return callback(null, false, { message: "Incorrect password." });
-//         }
+//       Users.findOne({ Username: username })
+//         .then((user) => {
+//           if (!user) {
+//             console.log("incorrect username");
+//             return callback(null, false, {
+//               message: "Incorrect username.",
+//             });
+//           }
+//           if (!user.validatePassword(password)) {
+//             console.log("incorrect password");
+//             return callback(null, false, { message: "Incorrect password." });
+//           }
 
-//         console.log("finished");
-//         return callback(null, user);
-//       });
+//           console.log("finished");
+//           return callback(null, user);
+//         })
+
+//         .catch((error) => {
+//           console.log(error);
+//           return callback(error, false);
+//         });
 //     }
 //   )
 // );

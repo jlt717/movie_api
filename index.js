@@ -269,7 +269,6 @@ app.get(
   }
 );
 
-//
 //error-handling middleware
 app.use((err, req, res, next) => {
   console.log(err);
