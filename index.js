@@ -10,8 +10,7 @@ const express = require("express"),
   morgan = require("morgan"),
   uuid = require("uuid");
 
-const uri = process.env.CONNECTION_URI;
-mongoose.connect(uri, {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
