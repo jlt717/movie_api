@@ -9,6 +9,8 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   morgan = require("morgan"),
   uuid = require("uuid");
+require("dotenv").config();
+console.log(process.env);
 
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
