@@ -208,7 +208,7 @@ app.get("/documentation", (req, res) => {
 
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
@@ -225,7 +225,7 @@ app.get(
 
 app.get(
   "/movies/:Title",
-  //passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then((movie) => {
