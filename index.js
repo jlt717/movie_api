@@ -225,7 +225,7 @@ app.get(
 
 app.get(
   "/movies/:Title",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then((movie) => {
