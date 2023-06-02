@@ -17,11 +17,6 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
-//mongoose.connect("mongodb://127.0.0.1:27017/CinedexDB", {
-// useNewUrlParser: true,
-// useUnifiedTopology: true,
-//});
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require("cors");
@@ -290,7 +285,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log("Listening on port " + port);
 });
-
-// app.listen(port, "0.0.0.0", () => {
-//   console.log("Listening on Port " + port);
-// });
