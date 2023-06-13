@@ -96,10 +96,10 @@ app.post(
 
 //Allows users to search for a specific user
 app.get(
-  "/users/:UserId",
+  "/users/:User_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Users.findOne({ Userid: req.params.Userid })
+    Users.findOne({ user_id: req.params.user_id })
       .then((user) => {
         res.json(user);
       })
