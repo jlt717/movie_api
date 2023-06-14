@@ -17,6 +17,7 @@ passport.use(
       console.log(username + " " + password);
 
       Users.findOne({ Username: username })
+        .populate("FavoriteMovies")
         .then((user) => {
           if (!user) {
             console.log("incorrect username");
@@ -31,11 +32,12 @@ passport.use(
           }
 
           console.log("finished");
+          user.Password = "";
           return callback(null, user);
         })
         .catch((e) => {
           console.error(e);
-          return callback(error);
+          return callback(e);
         });
     }
   )
