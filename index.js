@@ -189,7 +189,7 @@ app.delete(
 app.delete("/users/:Username", (req, res) => {
   User.findOneAndRemove({ Username: req.params.Username })
     .then(() => {
-      res.status(200).send(req.params.Username + " was deleted.");
+      res.status(200).json({ message: req.params.Username + " was deleted." });
     })
     .catch((err) => {
       res.status(500).send("Error: " + err);
