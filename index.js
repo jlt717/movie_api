@@ -187,7 +187,7 @@ app.delete(
 //Allows users to delete their account
 
 app.delete("/users/:Username", (req, res) => {
-  User.findOneAndRemove({ _id: req.user._id })
+  User.findOneAndRemove({ Username: req.params.Username })
     .then(() => {
       res.status(200).send(req.user.Username + " was deleted.");
     })
