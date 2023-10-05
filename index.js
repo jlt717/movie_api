@@ -96,15 +96,20 @@ app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+      const userEditInfo = {
+          Username: req.body.Username,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
+      }
+
+    if(typeof req.body.Password == "string" && req.body.Password.trim().length > 0){
+      userEditInfo.Password = Password: User.hashPassword(req.body.Password),
+    }
+    
     User.findOneAndUpdate(
       { _id: req.user._id }, //passport gets the current user from the token and saves the user data in req.user
       {
-        $set: {
-          Username: req.body.Username,
-          Password: User.hashPassword(req.body.Password),
-          Email: req.body.Email,
-          Birthday: req.body.Birthday,
-        },
+        $set: userEditInfo,
       },
       { new: true }
     )
