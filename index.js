@@ -15,8 +15,8 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use(express.static("public"));
 app.use(morgan("common"));
