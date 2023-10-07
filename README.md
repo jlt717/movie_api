@@ -18,7 +18,7 @@
 ### ● Search feature for searching my movie, genre, and director
 <br>
 
-## Languages, Libraries, and Frameworks
+## Technologies
 ### ● MongoDB
 ### ● Express
 ### ● Node.js
