@@ -29,5 +29,27 @@
 ### ● REST API
 <br>
 
+## Dependencies 
+```
+    "bcrypt": "5.1.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "7.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.2.0",
+    "morgan": "^1.10.0",
+    "npm": "^9.6.7",
+    "package-lock.json": "^1.0.0",
+    "package.json": "^0.0.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "uuid": "^9.0.0"
+  ```
+  <br>
+  
 ## Author
 ### Jamie Tracy
