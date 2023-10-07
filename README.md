@@ -1,5 +1,9 @@
 # Movie API (CineDEX backend)
 <br>
+
+## Screenshots
+<br>
+
 <img src="https://github.com/jlt717/movie_api/assets/128320420/492bc65a-2fab-4df5-a32a-c0b3d2e367ab" padding-right="25px" width="450">
     
    
