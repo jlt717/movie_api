@@ -1,14 +1,13 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
 const { check, validationResult } = require("express-validator");
 const { Movie, User } = require("./models.js");
 const passport = require("passport");
-
-require("dotenv").config();
 
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
