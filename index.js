@@ -5,18 +5,27 @@ const morgan = require("morgan");
 
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const { check, validationResult } = require("express-validator");
 const { Movie, User } = require("./models.js");
 const passport = require("passport");
 
-mongoose.connect(process.env.CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(process.env.CONNECTION_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(req.body);
+  next();
+});
 
 app.use(express.static("public"));
 app.use(morgan("common"));
