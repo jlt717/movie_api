@@ -11,6 +11,7 @@ const { check, validationResult } = require("express-validator");
 const { Movie, User } = require("./models.js");
 const passport = require("passport");
 
+console.log("MongoDB Connection URI:", process.env.CONNECTION_URI);
 mongoose
   .connect(process.env.CONNECTION_URI, {
     useNewUrlParser: true,
